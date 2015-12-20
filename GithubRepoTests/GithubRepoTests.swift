@@ -48,7 +48,7 @@ class GithubRepoTests: XCTestCase {
         let expectation = self.expectationWithDescription("Wait...")
         let provider = DetailsProvider()
         provider.getIssuesForRepo("Alamofire/Alamofire") { (issues) -> Void in
-            XCTAssertTrue(issues.count > 0)//Check if there's returned at least 1 issue. It will fail if there's none issue.
+            XCTAssertTrue(issues.count > 0)//Check if there's returned at least 1 issue. It will fail if there's no issues.
             expectation.fulfill()
         }
         self.waitForExpectationsWithTimeout(1000, handler: nil)

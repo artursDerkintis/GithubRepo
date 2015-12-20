@@ -17,6 +17,8 @@ class IssueTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        stateLabel.layer.cornerRadius = 10
+        stateLabel.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -81,6 +81,13 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
                     let dateString = date.timeAgo
                     issueCell.bodyLabel.text = "#\(issue.number!) opened \(dateString) by \(issue.openedBy!)"
                 }
+                if issue.state == "closed"{
+                    issueCell.stateLabel.backgroundColor = UIColor(red: 0.7, green: 0.1, blue: 0.1, alpha: 1.0)
+                    issueCell.stateLabel.textColor = .whiteColor()
+                }else if issue.state == "open"{
+                    issueCell.stateLabel.backgroundColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 1.0)
+                    issueCell.stateLabel.textColor = .whiteColor()
+                }
                 issueCell.stateLabel.text = issue.state
             }
             return issueCell

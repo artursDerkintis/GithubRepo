@@ -29,11 +29,29 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         // Do any additional setup after loading the view, typically from a nib.
         //Initially shows most popular languages
         suggestions = suggestionsProvider.topLanguages
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func keyboardWillHide(not: NSNotification){
+        tableView.contentInset = UIEdgeInsetsZero
+    }
+    //Prevents keyboard from hide bottom cells of tableView
+    func keyboardWillShow(not: NSNotification){
+        if let userInfo = not.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+                tableView.contentInset = contentInsets
+            } else {
+                
+            }
+        } else {
+        }
     }
     
     //UISearchBarDelegate
