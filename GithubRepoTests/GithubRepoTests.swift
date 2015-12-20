@@ -21,16 +21,36 @@ class GithubRepoTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLanguagesQuery(){
+        let provider = LanguagesProvider()
+        let list = provider.generateSuggestions("Ja")
+        XCTAssertEqual(list.count, 2)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    func testReposProvider(){
+        let provider = ReposotoriesProvider()
+        let expectation = self.expectationWithDescription("Wait for repos")
+        provider.getReposForLanguage("Swift") { (repos) -> Void in
+            XCTAssertEqual(repos.count, 30)//Usually it returns top 30 repos array
+            expectation.fulfill()
         }
+        self.waitForExpectationsWithTimeout(1000, handler: nil)
     }
-    
+    func testContributorsProvider(){
+        let expectation = self.expectationWithDescription("Wait...")
+        let provider = DetailsProvider()
+        provider.getContributorsForRepo("Alamofire/Alamofire") { (contrs) -> Void in
+            XCTAssertTrue(contrs.count > 0)//Check if there's returned at least 1 contributor
+            expectation.fulfill()
+        }
+        self.waitForExpectationsWithTimeout(1000, handler: nil)
+    }
+    func testIssuesProvider(){
+        let expectation = self.expectationWithDescription("Wait...")
+        let provider = DetailsProvider()
+        provider.getIssuesForRepo("Alamofire/Alamofire") { (issues) -> Void in
+            XCTAssertTrue(issues.count > 0)//Check if there's returned at least 1 issue. It will fail if there's none issue.
+            expectation.fulfill()
+        }
+        self.waitForExpectationsWithTimeout(1000, handler: nil)
+    }
 }
