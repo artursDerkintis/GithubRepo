@@ -22,25 +22,28 @@ class DetailsProvider: NSObject {
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 if response.response?.statusCode == 200{
-                    do{
-                        if let data = response.result.value as? Array<[String:AnyObject]>{
-                            for item in data {
-
+                    
+                    if let data = response.result.value as? Array<[String:AnyObject]>{
+                        for item in data {
+                            do{
                                 let contr = try self.parseContributorModel(item)
                                 //As you asked - Top 3 contributors
                                 if contributors.count < 3{
                                     contributors.append(contr)
+                                }else{
+                                    break
                                 }
+                            }catch let error{
+                                print("Something went wrong \(error)")
                             }
-                            completion(contrs: contributors)
                         }
-                    }catch let error{
-                        print("Something went wrong \(error)")
+                        completion(contrs: contributors)
                     }
+                    
                 }
         })
         
-
+        
     }
     func getIssuesForRepo(string : String, completion: (issues : [Issue]) -> Void){
         var issues_ = [Issue]()
@@ -53,24 +56,29 @@ class DetailsProvider: NSObject {
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 if response.response?.statusCode == 200{
-                    do{
-                        if let data = response.result.value as? Array<[String:AnyObject]>{
-                            for item in data {
-                                
+                    
+                    if let data = response.result.value as? Array<[String:AnyObject]>{
+                        for item in data {
+                            do{
                                 let contr = try self.parseIssueModel(item)
                                 //As you asked - 3 Newest Issues
                                 if issues_.count < 3{
                                     issues_.append(contr)
+                                }else{
+                                    break
                                 }
+                            }catch let error{
+                                print("Something went wrong \(error)")
                             }
-                            completion(issues: issues_)
+                            
+                            
                         }
-                    }catch let error{
-                        print("Something went wrong \(error)")
+                        completion(issues: issues_)
                     }
+                    
                 }
         })
-
+        
     }
     
     func parseContributorModel(data : [String : AnyObject]) throws -> Contributor{
@@ -106,6 +114,10 @@ class DetailsProvider: NSObject {
             throw ParseError.OpenedByNotFound
         }
         
+        guard let body = data["body"] as? String else{
+            throw ParseError.BodyNotFound
+        }
+        
         guard let state = data["state"] as? String else{
             throw ParseError.StateNotFound
         }
@@ -115,6 +127,7 @@ class DetailsProvider: NSObject {
         
         let newIssue = Issue()
         newIssue.title = title
+        newIssue.body = body
         newIssue.createdAt = openedAt
         newIssue.openedBy = openedBy
         newIssue.state = state
@@ -122,6 +135,6 @@ class DetailsProvider: NSObject {
         return newIssue
         
     }
-
-
+    
+    
 }

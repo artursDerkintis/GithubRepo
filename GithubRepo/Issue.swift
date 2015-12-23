@@ -14,4 +14,5 @@ class Issue: NSObject {
     var state : String?
     var openedBy : String?
     var number : Int?
+    var body : String?
 }

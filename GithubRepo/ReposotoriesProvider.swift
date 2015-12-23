@@ -22,7 +22,10 @@ enum ParseError : ErrorType{
     case UserNameCountNotFound
     case CommitCountNotFound
     case AvatarURLNotFound
-    
+    case FollowersNotFound
+    case FollowedNotFound
+    case LocationNotFound
+    case BodyNotFound
 }
 
 class ReposotoriesProvider: NSObject {

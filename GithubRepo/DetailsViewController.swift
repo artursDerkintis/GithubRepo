@@ -46,6 +46,9 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    var selectedLoginName : String?
+    var selectedIssue : Issue?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         repoNameLabel.text = repo?.name
@@ -53,7 +56,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
 
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -128,5 +131,22 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     //MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 0{
+            self.selectedLoginName = self.contributors?[indexPath.row].userName
+            self.performSegueWithIdentifier("Contributor", sender: self)
+        }else if indexPath.section == 1{
+            self.selectedIssue = self.issues?[indexPath.row]
+            self.performSegueWithIdentifier("Issue", sender: self)
+        }
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let userVC = segue.destinationViewController as? UserViewController{
+            userVC.loginName = self.selectedLoginName
+        }else if let issueVC = segue.destinationViewController as? IssueViewController{
+            issueVC.issue = self.selectedIssue
+        }
     }
 }

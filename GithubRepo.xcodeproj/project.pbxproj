@@ -10,6 +10,9 @@
 		256CE8329DFA983B4B7BCC59 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C43B25EE22546E786A7D5ED /* Pods.framework */; };
 		B81753011C26B72B00EBBB56 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81752FF1C26B72B00EBBB56 /* NSDate+Extension.swift */; };
 		B81753021C26B72B00EBBB56 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B81753001C26B72B00EBBB56 /* NSDateTimeAgo.bundle */; };
+		B81753041C270DF900EBBB56 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81753031C270DF900EBBB56 /* UserViewController.swift */; };
+		B81753061C270E5F00EBBB56 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81753051C270E5F00EBBB56 /* User.swift */; };
+		B81753081C270FE800EBBB56 /* UserDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81753071C270FE800EBBB56 /* UserDataProvider.swift */; };
 		B81C5DA11C242ED100158D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81C5DA01C242ED100158D86 /* AppDelegate.swift */; };
 		B81C5DA31C242ED100158D86 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81C5DA21C242ED100158D86 /* SearchViewController.swift */; };
 		B81C5DA61C242ED200158D86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81C5DA41C242ED200158D86 /* Main.storyboard */; };
@@ -30,6 +33,7 @@
 		B83435E91C25F50000DF96CA /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83435E81C25F50000DF96CA /* Extenstions.swift */; };
 		B83435EB1C25F52400DF96CA /* ContributorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83435EA1C25F52400DF96CA /* ContributorTableViewCell.swift */; };
 		B83435ED1C25F53300DF96CA /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83435EC1C25F53300DF96CA /* IssueTableViewCell.swift */; };
+		B845BB761C2B0457006DC959 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845BB751C2B0457006DC959 /* IssueViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,9 @@
 		9AA7DB4CA15F77158F34F3E0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B81752FF1C26B72B00EBBB56 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		B81753001C26B72B00EBBB56 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		B81753031C270DF900EBBB56 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		B81753051C270E5F00EBBB56 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B81753071C270FE800EBBB56 /* UserDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataProvider.swift; sourceTree = "<group>"; };
 		B81C5D9D1C242ED100158D86 /* GithubRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81C5DA01C242ED100158D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B81C5DA21C242ED100158D86 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +88,7 @@
 		B83435E81C25F50000DF96CA /* Extenstions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		B83435EA1C25F52400DF96CA /* ContributorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorTableViewCell.swift; sourceTree = "<group>"; };
 		B83435EC1C25F53300DF96CA /* IssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		B845BB751C2B0457006DC959 /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,8 @@
 				B81C5DA21C242ED100158D86 /* SearchViewController.swift */,
 				B83435DA1C25C14C00DF96CA /* RepositoresViewController.swift */,
 				B83435DE1C25E7AE00DF96CA /* DetailsViewController.swift */,
+				B81753031C270DF900EBBB56 /* UserViewController.swift */,
+				B845BB751C2B0457006DC959 /* IssueViewController.swift */,
 				B83435EE1C25F53A00DF96CA /* TableViewCells */,
 				B83435E71C25EFAE00DF96CA /* DataProviders */,
 				B83435E61C25EF9900DF96CA /* Models */,
@@ -185,6 +195,7 @@
 				B81C5DD61C24420E00158D86 /* Repo.swift */,
 				B83435E21C25EF3100DF96CA /* Contributor.swift */,
 				B83435E41C25EF7A00DF96CA /* Issue.swift */,
+				B81753051C270E5F00EBBB56 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 				B81C5DD41C2441B400158D86 /* ReposotoriesProvider.swift */,
 				B81C5DD21C2434FF00158D86 /* LanguagesProvider.swift */,
 				B83435E01C25EE1000DF96CA /* DetailsProvider.swift */,
+				B81753071C270FE800EBBB56 /* UserDataProvider.swift */,
 			);
 			name = DataProviders;
 			sourceTree = "<group>";
@@ -406,8 +418,11 @@
 				B81C5DA31C242ED100158D86 /* SearchViewController.swift in Sources */,
 				B83435E51C25EF7A00DF96CA /* Issue.swift in Sources */,
 				B83435E31C25EF3100DF96CA /* Contributor.swift in Sources */,
+				B81753041C270DF900EBBB56 /* UserViewController.swift in Sources */,
 				B81C5DD31C2434FF00158D86 /* LanguagesProvider.swift in Sources */,
 				B83435E11C25EE1000DF96CA /* DetailsProvider.swift in Sources */,
+				B81753081C270FE800EBBB56 /* UserDataProvider.swift in Sources */,
+				B81753061C270E5F00EBBB56 /* User.swift in Sources */,
 				B81C5DD71C24420E00158D86 /* Repo.swift in Sources */,
 				B83435DF1C25E7AF00DF96CA /* DetailsViewController.swift in Sources */,
 				B83435DD1C25CE2B00DF96CA /* RepoTableViewCell.swift in Sources */,
@@ -415,6 +430,7 @@
 				B83435DB1C25C14C00DF96CA /* RepositoresViewController.swift in Sources */,
 				B81C5DD51C2441B400158D86 /* ReposotoriesProvider.swift in Sources */,
 				B81C5DA11C242ED100158D86 /* AppDelegate.swift in Sources */,
+				B845BB761C2B0457006DC959 /* IssueViewController.swift in Sources */,
 				B83435EB1C25F52400DF96CA /* ContributorTableViewCell.swift in Sources */,
 				B83435ED1C25F53300DF96CA /* IssueTableViewCell.swift in Sources */,
 			);
