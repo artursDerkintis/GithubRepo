@@ -148,11 +148,11 @@
 			isa = PBXGroup;
 			children = (
 				B81C5DA01C242ED100158D86 /* AppDelegate.swift */,
+				B81C5DA41C242ED200158D86 /* Main.storyboard */,
 				B845BB771C2B24B7006DC959 /* ViewControllers */,
 				B83435EE1C25F53A00DF96CA /* TableViewCells */,
 				B83435E71C25EFAE00DF96CA /* DataProviders */,
 				B83435E61C25EF9900DF96CA /* Models */,
-				B81C5DA41C242ED200158D86 /* Main.storyboard */,
 				B845BB781C2B24D6006DC959 /* Supporting Files */,
 			);
 			path = GithubRepo;
