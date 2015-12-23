@@ -28,7 +28,7 @@ class GithubRepoTests: XCTestCase {
     }
     func testReposProvider(){
         let provider = ReposotoriesProvider()
-        let expectation = self.expectationWithDescription("Wait for repos")
+        let expectation = self.expectationWithDescription("Wait...")
         provider.getReposForLanguage("Swift") { (repos) -> Void in
             XCTAssertEqual(repos.count, 30)//Usually it returns top 30 repos array
             expectation.fulfill()
@@ -53,4 +53,15 @@ class GithubRepoTests: XCTestCase {
         }
         self.waitForExpectationsWithTimeout(1000, handler: nil)
     }
+    func testUserDataProvider(){
+        let expectation = self.expectationWithDescription("Wait...")
+        let provider = UserDataProvider()
+        provider.getUserInfoForLoginName("artursDerkintis") { (user) -> Void in
+            XCTAssertNotNil(user)
+            expectation.fulfill()
+        }
+        self.waitForExpectationsWithTimeout(1000, handler: nil)
+    }
+
+    
 }
