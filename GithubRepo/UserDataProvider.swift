@@ -24,48 +24,38 @@ class UserDataProvider: NSObject {
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 if response.response?.statusCode == 200{
-                    do{
-                        if let data = response.result.value as? [String:AnyObject]{
-                            let user = try self.parseUserModel(data)
-                            completion(user: user)
-                        }
-                    }catch let error{
-                        print("Something went wrong \(error)")
+                    
+                    if let data = response.result.value as? [String:AnyObject]{
+                        let user = self.parseUserModel(data)
+                        completion(user: user)
                     }
+                    
                 }
 
                 
         })
     }
-    func parseUserModel(data : [String : AnyObject]) throws -> User{
-        guard let name = data["name"] as? String else{
-            throw ParseError.NameNotFound
-        }
-        guard let followers  = data["followers"] as? Int else{
-            throw ParseError.FollowersNotFound
-        }
-        guard let following = data["following"] as? Int else{
-            throw ParseError.FollowedNotFound
-        }
-        guard let location = data["location"] as? String else{
-            throw ParseError.LocationNotFound
-        }
-        guard let createdAt = data["created_at"] as? String else{
-            throw ParseError.DateNotFound
-        }
-        guard let avatarURL = data["avatar_url"] as? String else{
-            throw ParseError.AvatarURLNotFound
-        }
-        
-        
+    func parseUserModel(data : [String : AnyObject]) -> User{
         let newUser = User()
-        newUser.avatarURL = avatarURL
-        newUser.followers = followers
-        newUser.following = following
-        newUser.name = name
-        newUser.location = location
-        newUser.createdAt = createdAt
+        if let name = data["name"] as? String{
+            newUser.name = name
+        }
         
+        if let followers  = data["followers"] as? Int {
+            newUser.followers = followers
+        }
+        if let following = data["following"] as? Int {
+            newUser.following = following
+        }
+        if let location = data["location"] as? String {
+            newUser.location = location
+        }
+        if let createdAt = data["created_at"] as? String{
+            newUser.createdAt = createdAt
+        }
+        if let avatarURL = data["avatar_url"] as? String{
+            newUser.avatarURL = avatarURL
+        }
         return newUser
         
     }

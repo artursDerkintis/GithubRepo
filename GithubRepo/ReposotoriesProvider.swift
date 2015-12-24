@@ -9,24 +9,6 @@
 import UIKit
 import Alamofire
 
-enum ParseError : ErrorType{
-    case BadID
-    case NameNotFound
-    case StargezersCountNotFound
-    case DescriptionNotFound
-    case TitleNotFound
-    case DateNotFound
-    case OpenedByNotFound
-    case StateNotFound
-    case NumberNotFound
-    case UserNameCountNotFound
-    case CommitCountNotFound
-    case AvatarURLNotFound
-    case FollowersNotFound
-    case FollowedNotFound
-    case LocationNotFound
-    case BodyNotFound
-}
 
 class ReposotoriesProvider: NSObject {
     
@@ -41,22 +23,20 @@ class ReposotoriesProvider: NSObject {
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 if response.response?.statusCode == 200{
-                    do{
-                        if let data = response.result.value as? [String: AnyObject]{
-                            if let items = data["items"] as? Array<[String:AnyObject]>{
-                                for item in items {
-                                    let repo = try self.parseRepoModel(item)
-                                    _repos.append(repo)
-                                }
-                                completion(repos: _repos)
-                                
-                                
-                                
+                    
+                    if let data = response.result.value as? [String: AnyObject]{
+                        if let items = data["items"] as? Array<[String:AnyObject]>{
+                            for item in items {
+                                let repo = self.parseRepoModel(item)
+                                _repos.append(repo)
                             }
+                            completion(repos: _repos)
+                            
+                            
+                            
                         }
-                    }catch let error{
-                        print("Something went wrong \(error)")
                     }
+                    
                     
                 }else{
                     //nothing found
@@ -64,28 +44,24 @@ class ReposotoriesProvider: NSObject {
                     print(response.response)
                 }
                 
-            })
+        })
         
     }
     
-    func parseRepoModel(data : [String : AnyObject]) throws -> Repo{
-        guard let id  = data["id"] as? Int else{
-            throw ParseError.BadID
-        }
-        guard let nameOfRepo = data["full_name"] as? String else{
-            throw ParseError.NameNotFound
-        }
-        guard let descriptionOfRepo = data["description"] as? String else{
-            throw ParseError.DescriptionNotFound
-        }
-        guard let starCount = data["stargazers_count"] as? Int else{
-            throw ParseError.StargezersCountNotFound
-        }
+    func parseRepoModel(data : [String : AnyObject]) -> Repo{
         let newRepo = Repo()
-        newRepo.id = id
-        newRepo.name = nameOfRepo
-        newRepo.starsCount = starCount
-        newRepo.desc = descriptionOfRepo
+        if let id  = data["id"] as? Int {
+            newRepo.id = id
+        }
+        if let nameOfRepo = data["full_name"] as? String {
+            newRepo.name = nameOfRepo
+        }
+        if let descriptionOfRepo = data["description"] as? String {
+            newRepo.desc = descriptionOfRepo
+        }
+        if let starCount = data["stargazers_count"] as? Int {
+            newRepo.starsCount = starCount
+        }
         return newRepo
         
     }

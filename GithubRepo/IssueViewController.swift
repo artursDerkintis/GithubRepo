@@ -38,7 +38,7 @@ class IssueViewController: UIViewController{
         setAttributedString()
     }
     func setAttributedString(){
-        if let string = issue!.body! as? NSString{
+        if let string = issue?.body{
             if let range = string.stringBetween("```", and: "```"){
                 let background = [NSForegroundColorAttributeName: UIColor.blackColor(), NSBackgroundColorAttributeName: UIColor(white: 0.8, alpha: 1.0), NSFontAttributeName: UIFont(name: "Menlo-Regular", size: 13)!]
                 let attributesString = NSMutableAttributedString(string: (string.mutableCopy() as! String).stringByReplacingOccurrencesOfString("```", withString:
@@ -48,6 +48,8 @@ class IssueViewController: UIViewController{
             }else{
                 self.bodyTextView.text = string as String
             }
+        }else{
+            self.bodyTextView.text = "No description found."
         }
     }
 ///"```"

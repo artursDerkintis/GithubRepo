@@ -25,17 +25,14 @@ class DetailsProvider: NSObject {
                     
                     if let data = response.result.value as? Array<[String:AnyObject]>{
                         for item in data {
-                            do{
-                                let contr = try self.parseContributorModel(item)
-                                //As you asked - Top 3 contributors
-                                if contributors.count < 3{
-                                    contributors.append(contr)
-                                }else{
-                                    break
-                                }
-                            }catch let error{
-                                print("Something went wrong \(error)")
+                            let contr = self.parseContributorModel(item)
+                            //As you asked - Top 3 contributors
+                            if contributors.count < 3{
+                                contributors.append(contr)
+                            }else{
+                                break
                             }
+                            
                         }
                         completion(contrs: contributors)
                     }
@@ -59,17 +56,15 @@ class DetailsProvider: NSObject {
                     
                     if let data = response.result.value as? Array<[String:AnyObject]>{
                         for item in data {
-                            do{
-                                let contr = try self.parseIssueModel(item)
-                                //As you asked - 3 Newest Issues
-                                if issues_.count < 3{
-                                    issues_.append(contr)
-                                }else{
-                                    break
-                                }
-                            }catch let error{
-                                print("Something went wrong \(error)")
+                            
+                            let contr = self.parseIssueModel(item)
+                            //As you asked - 3 Newest Issues
+                            if issues_.count < 3{
+                                issues_.append(contr)
+                            }else{
+                                break
                             }
+                            
                             
                             
                         }
@@ -81,57 +76,46 @@ class DetailsProvider: NSObject {
         
     }
     
-    func parseContributorModel(data : [String : AnyObject]) throws -> Contributor{
-        guard let userName  = data["login"] as? String else{
-            throw ParseError.NameNotFound
-        }
-        
-        guard let commitCount = data["contributions"] as? Int else{
-            throw ParseError.CommitCountNotFound
-        }
-        
-        guard let avatarURL = data["avatar_url"] as? String else{
-            throw ParseError.AvatarURLNotFound
-        }
-        
+    func parseContributorModel(data : [String : AnyObject]) -> Contributor{
         let newContr = Contributor()
-        newContr.userName = userName
-        newContr.commitCount = commitCount
-        newContr.avatarURL = avatarURL
+        if let userName  = data["login"] as? String {
+            newContr.userName = userName
+        }
+        
+        if let commitCount = data["contributions"] as? Int {
+            newContr.commitCount = commitCount
+        }
+        
+        if let avatarURL = data["avatar_url"] as? String {
+            newContr.avatarURL = avatarURL
+        }
         return newContr
         
     }
-    func parseIssueModel(data : [String : AnyObject]) throws -> Issue{
-        guard let title  = data["title"] as? String else{
-            throw ParseError.TitleNotFound
-        }
-        
-        guard let openedAt = data["created_at"] as? String else{
-            throw ParseError.DateNotFound
-        }
-        
-        guard let openedBy = data["user"]?.valueForKey("login") as? String else{
-            throw ParseError.OpenedByNotFound
-        }
-        
-        guard let body = data["body"] as? String else{
-            throw ParseError.BodyNotFound
-        }
-        
-        guard let state = data["state"] as? String else{
-            throw ParseError.StateNotFound
-        }
-        guard let number = data["number"] as? Int else{
-            throw ParseError.NumberNotFound
-        }
-        
+    func parseIssueModel(data : [String : AnyObject]) -> Issue{
         let newIssue = Issue()
-        newIssue.title = title
-        newIssue.body = body
-        newIssue.createdAt = openedAt
-        newIssue.openedBy = openedBy
-        newIssue.state = state
-        newIssue.number = number
+        if let title  = data["title"] as? String {
+            newIssue.title = title
+        }
+        
+        if let openedAt = data["created_at"] as? String {
+            newIssue.createdAt = openedAt
+        }
+        
+        if let openedBy = data["user"]?.valueForKey("login") as? String {
+            newIssue.openedBy = openedBy
+        }
+        
+        if let body = data["body"] as? String {
+            newIssue.body = body
+        }
+        
+        if let state = data["state"] as? String {
+            newIssue.state = state
+        }
+        if let number = data["number"] as? Int {
+            newIssue.number = number
+        }
         return newIssue
         
     }
